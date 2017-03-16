@@ -1,0 +1,7 @@
+{
+  "itemDisplayName": "Create Resource groups and assign permissions for Citrix XenDesktop Express",
+  "description": "This template creates resource groups and assigns minimum permissions to an application service principal account for creating and managing workstations and the required Citrix infrastrucutre.",
+  "summary": "Create capacity for XenDesktop Express",
+  "githubUsername": "brianehlert",
+  "dateUpdated": "2017-03-16"
+}

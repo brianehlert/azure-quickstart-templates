@@ -3,26 +3,32 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "targetSubscription": {
-      "type": "string"
+      "type": "string",
+      "metadata": {"description": "The subscription where XenDesktop Express will be deployed"}
     },
     "servicePrincipal": {
-      "type": "string"
+      "type": "string",
+      "metadata": {"description": "The application service principal that XenDesktop Express will use to manage worker machines"}
     },
     "cloudManagement": {
       "type": "string",
+      "metadata": {"description": "The amount of resource control granted to the Citrix control plane"},
       "allowedValues": [
         "Dedicated",
         "Delegated"
       ]
     },
       "virtualNetwork": {
-      "type": "string"
+      "type": "string",
+      "metadata": {"description": "The virtual network that Citrix machines will be joined to"}
     },
       "RGPreamble": {
-      "type": "string"
+      "type": "string",
+      "metadata": {"description": "A custom resource group name prefix (optional)"}
     },
       "workerCapacity": {
-      "type": "int"
+      "type": "int",
+      "metadata": {"description": "The number of VMs that capacity is being provisioned for"}
     }
   },
   "variables": {
@@ -33,10 +39,13 @@
       "type": "Microsoft.Authorization/roleAssignments",
       "name": "DCE46385-7B6B-4E6B-87ED-F011289008D3",
       "properties": {
-        "roleDefinitionId": "[variables(parameters('builtInRoleType'))]",
-        "principalId": "[parameters('principalId')]",
-        "scope": "[variables('scope')]"
-      }
+        "targetSubscription": "[variables('targetSubscription')]",
+        "servicePrincipal": "[variables('servicePrincipal')]",
+        "cloudManagement": "[variables('cloudManagement')]",
+        "virtualNetwork": "[variables('virtualNetwork')]",
+        "RGPreamble": "[variables('RGPreamble')]",
+        "workerCapacity": "[variables('workerCapacity')]"
+     }
     }
   ]
 }
