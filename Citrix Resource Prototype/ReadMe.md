@@ -1,30 +1,25 @@
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-rbac-builtinrole-resourcegroup%2Fazuredeploy.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https://raw.githubusercontent.com/brianehlert/azure-quickstart-templates/myUI/Citrix%20Resource%20Prototype/azuredeploy.json" target="_blank">
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
-<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-rbac-builtinrole-resourcegroup%2Fazuredeploy.json" target="_blank">
+<a href="http://armviz.io/#/?load=https://raw.githubusercontent.com/brianehlert/azure-quickstart-templates/myUI/Citrix%20Resource%20Prototype/azuredeploy.json" target="_blank">
   <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template assigns Owner, Reader or Contributor access to an existing resource group. Inputs to this template are following fields:
+This template creates resource groups and assigns minimum permissions to an application service principal account for creating and managing workstations and the required Citrix infrastrucutre:
 
-- Principal ID
-- Role Definition Type
+The following Resource Groups will be created:
+- Citrix Infrastructure
+- Citrix Image Store
+- Citrix Workstations
 
+The selected application service principal will be assigned rights to the subscription (Dedicated) or rights to individual resource groups (delegated).
 
-**Use following powershell command to get Principal ID associated with a user using their email id. Please note, principal id maps to the id inside the directory and can point to a user, service principal, or security group. The ObjectId is the principal ID.
+The selected service principal will be granted read only access to the image store, and to the selected Virtual Network.
 
-    PS C:\> Get-AzureADUser -mail <email id>
-    
-    DisplayName                    Type                           ObjectId
-    -----------                    ----                           --------
-    <NAME>                                                        xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Prior to running this template, please ensure that you have established the following:
+- Virtual Network and subnet(s) for use by the workstations and Citrix infrastrucutre machines.
+- Azure Active Directory with either Azure Active Directory Domain Services or a replica Domain Controller instance attached to the above virtual network.
+- Update the DNS settings of the virtual network to the AADDS or AD machine instance(s) IP addresses.
+- Create a subscription for your Citrix XenDekstop Express deployment (Citrix recommends creating subscription(s) for XenDestkop Express that are seperate from other corporate infrastructure)
+- Application Service Principal for use by the Citrix Cloud Service to access your XenDesktop Express machines and to manage workstation lifecycle.  If not, you can run this <> template
 
-
-**Use following powershell command to learn about RoleDefinitions. Please note, the template already uses appropriate roleDefinition Id. The applicable RoleDefinition names are avialable in the parameter dropdown. 
-
-    PS C:\> Get-AzureRoleDefinition | fl
-
-    Name       : Contributor
-    Id         : /subscriptions/ xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c
-    Actions    : {*}
-    NotActions : {Microsoft.Authorization/*/Write, Microsoft.Authorization/*/Delete} 
