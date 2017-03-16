@@ -16,54 +16,34 @@
         "a3edd088-f344-44ec-a798-ff3e00ad5819"
       ],
       "metadata": {
-        "description": "Input array for principal IDs associated with users."
+        "description": "the application service principal"
       }
     },
-    "resourceGroup": {
+    "cloudManagement": {
       "type": "array",
       "defaultValue": [
-        "CloudDep",
-        "CloudDep"
+        "dedicated",
+        "delegated"
       ],
       "metadata": {
-        "description": "Input array for resource group names."
+        "description": "Citrix Cloud management access"
       }
     },
-    "virtualMachineName": {
-      "type": "array",
-      "defaultValue": [
-        "msvm",
-        "manavivm"
-      ],
-      "metadata": {
-        "description": "Input array for virtual machine names"
-      }
-    },
-    "builtInRoleType": {
-      "type": "array",
-      "defaultValue": [
-        "Contributor",
-        "Contributor"
-      ],
-      "metadata": {
-        "description": "Input array for built in types"
-      }
-    },
-    "guid": {
+    "prefix": {
       "type": "array",
       "defaultValue": [
         "099A9D93-B94F-44A0-9794-B949BCD76968",
         "71121498-465D-465A-AA4A-861DC8116095"
       ],
       "metadata": {
-        "description": "Input array for new GUIDs associated with assigning built in role types"
+        "description": "custom resource group prefix (optional)"
       }
     },
     "count": {
       "type": "int",
-      "defaultValue": 2,
+      "defaultValue": 100,
       "metadata": {
-        "description": "Size of array"
+        "description": "number of worker machines"
       }
     }
   },
